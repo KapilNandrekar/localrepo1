@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Inventory Manager</title>
+    <style>
+:root {
+  --color-white: rgba(255, 255, 255, 1);
+  --color-black: rgba(0, 0, 0, 1);
+  --color-cream-50: rgba(252, 252, 249, 1);
+  --color-cream-100: rgba(255, 255, 253, 1);
+  --color-gray-200: rgba(245, 245, 245, 1);
+  --color-gray-300: rgba(167, 169, 169, 1);
+  --color-gray-400: rgba(119, 124, 124, 1);
+  --color-slate-500: rgba(98, 108, 113, 1);
+  --color-brown-600: rgba(94, 82, 64, 1);
+  --color-charcoal-700: rgba(31, 33, 33, 1);
+  --color-charcoal-800: rgba(38, 40, 40, 1);
+  --color-slate-900: rgba(19, 52, 59, 1);
+  --color-teal-300: rgba(50, 184, 198, 1);
+  --color-teal-400: rgba(45, 166, 178, 1);
+  --color-teal-500: rgba(33, 128, 141, 1);
+  --color-teal-600: rgba(29, 116, 128, 1);
+  --color-teal-700: rgba(26, 104, 115, 1);
+  --color-teal-800: rgba(41, 150, 161, 1);
+  --color-red-400: rgba(255, 84, 89, 1);
+  --color-red-500: rgba(192, 21, 47, 1);
+  --color-orange-400: rgba(230, 129, 97, 1);
+  --color-orange-500: rgba(168, 75, 47, 1);
+  --color-brown-600-rgb: 94, 82, 64;
+  --color-teal-500-rgb: 33, 128, 141;
+  --color-slate-900-rgb: 19, 52, 59;
+  --color-slate-500-rgb: 98, 108, 113;
+  --color-red-500-rgb: 192, 21, 47;
+  --color-red-400-rgb: 255, 84, 89;
+  --color-orange-500-rgb: 168, 75, 47;
+  --color-orange-400-rgb: 230, 129, 97;
+  --color-bg-1: rgba(59, 130, 246, 0.08);
+  --color-bg-2: rgba(245, 158, 11, 0.08);
+  --color-bg-3: rgba(34, 197, 94, 0.08);
+  --color-bg-4: rgba(239, 68, 68, 0.08);
+  --color-bg-5: rgba(147, 51, 234, 0.08);
+  --color-background: var(--color-cream-50);
+  --color-surface: var(--color-cream-100);
+  --color-text: var(--color-slate-900);
+  --color-text-secondary: var(--color-slate-500);
+  --color-primary: var(--color-teal-500);
+  --color-primary-hover: var(--color-teal-600);
+  --color-primary-active: var(--color-teal-700);
+  --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.25);
+  --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-btn-primary-text: var(--color-cream-50);
+  --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-card-border-inner: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-error: var(--color-red-500);
+  --color-success: var(--color-teal-500);
+  --color-warning: var(--color-orange-500);
+  --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.4);
+  --color-select-caret: rgba(var(--color-slate-900-rgb), 0.8);
+  --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-size-xs: 11px;
+  --font-size-sm: 12px;
+  --font-size-base: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 18px;
+  --font-size-2xl: 20px;
+  --font-size-3xl: 24px;
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --radius-sm: 6px;
+  --radius-base: 8px;
+  --radius-lg: 12px;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-gray-400-rgb: 119, 124, 124;
+    --color-teal-300-rgb: 50, 184, 198;
+    --color-gray-300-rgb: 167, 169, 169;
+    --color-gray-200-rgb: 245, 245, 245;
+    --color-background: var(--color-charcoal-700);
+    --color-surface: var(--color-charcoal-800);
+    --color-text: var(--color-gray-200);
+    --color-text-secondary: rgba(var(--color-gray-300-rgb), 0.7);
+    --color-primary: var(--color-teal-300);
+    --color-primary-hover: var(--color-teal-400);
+    --color-primary-active: var(--color-teal-800);
+    --color-secondary: rgba(var(--color-gray-400-rgb), 0.15);
+    --color-secondary-hover: rgba(var(--color-gray-400-rgb), 0.25);
+    --color-border: rgba(var(--color-gray-400-rgb), 0.3);
+    --color-error: var(--color-red-400);
+    --color-success: var(--color-teal-300);
+    --color-warning: var(--color-orange-400);
+    --color-btn-primary-text: var(--color-slate-900);
+    --color-card-border: rgba(var(--color-gray-400-rgb), 0.2);
+    --color-card-border-inner: rgba(var(--color-gray-400-rgb), 0.15);
+  }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family-base);
+  background: var(--color-background);
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--space-24);
+}
+
+/* Header */
+.header {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-card-border);
+  padding: var(--space-16) var(--space-24);
+  margin-bottom: var(--space-24);
+  border-radius: var(--radius-lg);
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: var(--font-size-2xl);
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.header-actions {
+  display: flex;
+  gap: var(--space-12);
+  align-items: center;
+}
+
+.user-info {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+/* Navigation */
+.nav {
+  display: flex;
+  gap: var(--space-8);
+  margin-bottom: var(--space-24);
+  background: var(--color-surface);
+  padding: var(--space-12);
+  border-radius: var(--radius-lg);
+  flex-wrap: wrap;
+}
+
+.nav-btn {
+  padding: var(--space-12) var(--space-20);
+  border: none;
+  background: transparent;
+  color: var(--color-text);
+  cursor: pointer;
+  border-radius: var(--radius-base);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.nav-btn:hover {
+  background: var(--color-secondary);
+}
+
+.nav-btn.active {
+  background: var(--color-primary);
+  color: var(--color-btn-primary-text);
+}
+
+/* Dashboard Grid */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-24);
+  margin-bottom: var(--space-32);
+}
+
+.stat-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-24);
+  box-shadow: var(--shadow-sm);
+}
+
+.stat-card h3 {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-8);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.stat-value {
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: var(--space-8);
+}
+
+.stat-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+/* Tables */
+.section {
+  background: var(--color-surface);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-24);
+  margin-bottom: var(--space-24);
+  box-shadow: var(--shadow-sm);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-20);
+}
+
+.section-title {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+}
+
+.search-bar {
+  padding: var(--space-8) var(--space-12);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-base);
+  font-size: var(--font-size-base);
+  background: var(--color-background);
+  color: var(--color-text);
+  width: 300px;
+}
+
+.search-bar:focus {
+  outline: 2px solid var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  text-align: left;
+  padding: var(--space-12);
+  background: var(--color-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+td {
+  padding: var(--space-12);
+  border-bottom: 1px solid var(--color-card-border);
+  font-size: var(--font-size-base);
+}
+
+tr:hover {
+  background: var(--color-secondary);
+}
+
+.status {
+  display: inline-block;
+  padding: var(--space-4) var(--space-12);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+}
+
+.status-completed {
+  background: rgba(var(--color-teal-500-rgb), 0.15);
+  color: var(--color-success);
+  border: 1px solid rgba(var(--color-teal-500-rgb), 0.25);
+}
+
+.status-late {
+  background: rgba(var(--color-red-500-rgb), 0.15);
+  color: var(--color-error);
+  border: 1px solid rgba(var(--color-red-500-rgb), 0.25);
+}
+
+.status-ongoing {
+  background: rgba(var(--color-orange-500-rgb), 0.15);
+  color: var(--color-warning);
+  border: 1px solid rgba(var(--color-orange-500-rgb), 0.25);
+}
+
+/* Buttons */
+.btn {
+  padding: var(--space-8) var(--space-16);
+  border: none;
+  border-radius: var(--radius-base);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: var(--color-btn-primary-text);
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-hover);
+}
+
+.btn-secondary {
+  background: var(--color-secondary);
+  color: var(--color-text);
+}
+
+.btn-secondary:hover {
+  background: var(--color-secondary-hover);
+}
+
+.btn-small {
+  padding: var(--space-4) var(--space-12);
+  font-size: var(--font-size-sm);
+}
+
+/* Forms */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-16);
+  margin-bottom: var(--space-20);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  margin-bottom: var(--space-4);
+  color: var(--color-text);
+}
+
+input, select, textarea {
+  padding: var(--space-8) var(--space-12);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-base);
+  font-size: var(--font-size-base);
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-family-base);
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: 2px solid var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.error-message {
+  color: var(--color-error);
+  font-size: var(--font-size-sm);
+  margin-top: var(--space-4);
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-content {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-32);
+  max-width: 600px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-md);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-24);
+}
+
+.modal-title {
+  font-size: var(--font-size-2xl);
+  font-weight: 600;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: var(--font-size-2xl);
+  cursor: pointer;
+  color: var(--color-text-secondary);
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-btn:hover {
+  color: var(--color-text);
+}
+
+.hidden {
+  display: none !important;
+}
+
+.actions-group {
+  display: flex;
+  gap: var(--space-8);
+  justify-content: flex-end;
+  margin-top: var(--space-20);
+}
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">📚 Book Inventory Manager</div>
+            <div class="header-actions">
+                <span class="user-info" id="userDisplay">Guest</span>
+                <button class="btn btn-secondary btn-small" id="logoutBtn">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Login Screen -->
+        <div id="loginScreen">
+            <div class="section" style="max-width: 500px; margin: 100px auto;">
+                <h2 class="section-title" style="margin-bottom: var(--space-24);">Sign In / Sign Up</h2>
+                <div style="margin-bottom: var(--space-24);">
+                    <button class="btn btn-primary" style="width: 48%; margin-right: 4%;" id="showLoginBtn">Login</button>
+                    <button class="btn btn-secondary" style="width: 48%;" id="showSignupBtn">Sign Up</button>
+                </div>
+                
+                <!-- Login Form -->
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="loginUsername">Username</label>
+                        <input type="text" id="loginUsername" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" required>
+                    </div>
+                    <div class="error-message" id="loginError"></div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: var(--space-16);">Login</button>
+                </form>
+
+                <!-- Signup Form -->
+                <form id="signupForm" class="hidden">
+                    <div class="form-group">
+                        <label for="signupUsername">Username *</label>
+                        <input type="text" id="signupUsername" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupEmail">Email *</label>
+                        <input type="email" id="signupEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupPassword">Password *</label>
+                        <input type="password" id="signupPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupConfirmPassword">Confirm Password *</label>
+                        <input type="password" id="signupConfirmPassword" required>
+                    </div>
+                    <div class="error-message" id="signupError"></div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: var(--space-16);">Sign Up</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Main App (Hidden until logged in) -->
+        <div id="mainApp" class="hidden">
+            <!-- Navigation -->
+            <nav class="nav">
+                <button class="nav-btn active" data-view="dashboard">Dashboard</button>
+                <button class="nav-btn" data-view="books">Books</button>
+                <button class="nav-btn" data-view="operations">Operations</button>
+                <button class="nav-btn" data-view="moveHistory">Move History</button>
+                <button class="nav-btn" data-view="settings">Settings</button>
+            </nav>
+
+            <!-- Dashboard View -->
+            <div id="dashboardView" class="view-container">
+                <!-- Stats Cards -->
+                <div class="dashboard-grid">
+                    <div class="stat-card">
+                        <h3>Total Books</h3>
+                        <div class="stat-value" id="totalBooks">0</div>
+                        <div class="stat-label">Books in inventory</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Available Books</h3>
+                        <div class="stat-value" id="availableBooks">0</div>
+                        <div class="stat-label">Free to use</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Ongoing Operations</h3>
+                        <div class="stat-value" id="ongoingOps">0</div>
+                        <div class="stat-label">In progress</div>
+                    </div>
+                </div>
+
+                <!-- Receipts Section -->
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">📦 Incoming Receipts</h2>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Book Title</th>
+                                    <th>Quantity</th>
+                                    <th>Expected Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="receiptsTable">
+                                <tr>
+                                    <td colspan="4" style="text-align: center; color: var(--color-text-secondary);">No incoming receipts</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Deliveries Section -->
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">🚚 Outgoing Deliveries</h2>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Book Title</th>
+                                    <th>Quantity</th>
+                                    <th>Due Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="deliveriesTable">
+                                <tr>
+                                    <td colspan="4" style="text-align: center; color: var(--color-text-secondary);">No outgoing deliveries</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Books View -->
+            <div id="booksView" class="view-container hidden">
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">📚 Book Inventory</h2>
+                        <button class="btn btn-primary" id="addBookBtn">+ Add Book</button>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>ISBN</th>
+                                    <th>Quantity</th>
+                                    <th>Available</th>
+                                    <th>Cost/Unit</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="booksTable">
+                                <tr>
+                                    <td colspan="6" style="text-align: center; color: var(--color-text-secondary);">No books in inventory</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Operations View -->
+            <div id="operationsView" class="view-container hidden">
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">⚙️ Operations</h2>
+                        <button class="btn btn-primary" id="addOperationBtn">+ New Operation</button>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Operation ID</th>
+                                    <th>Type</th>
+                                    <th>Book</th>
+                                    <th>Quantity</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="operationsTable">
+                                <tr>
+                                    <td colspan="7" style="text-align: center; color: var(--color-text-secondary);">No operations</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Move History View -->
+            <div id="moveHistoryView" class="view-container hidden">
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">📋 Move History</h2>
+                        <input type="text" class="search-bar" id="moveSearchBar" placeholder="Search by book title or code...">
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Code</th>
+                                    <th>Date</th>
+                                    <th>Book</th>
+                                    <th>Direction</th>
+                                    <th>Contact</th>
+                                    <th>Quantity</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="moveHistoryTable">
+                                <tr>
+                                    <td colspan="7" style="text-align: center; color: var(--color-text-secondary);">No move history</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings View -->
+            <div id="settingsView" class="view-container hidden">
+                <div class="section">
+                    <h2 class="section-title" style="margin-bottom: var(--space-24);">🏢 Warehouses</h2>
+                    <button class="btn btn-primary" id="addWarehouseBtn" style="margin-bottom: var(--space-16);">+ Add Warehouse</button>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Location</th>
+                                    <th>Address</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="warehousesTable">
+                                <tr>
+                                    <td colspan="4" style="text-align: center; color: var(--color-text-secondary);">No warehouses configured</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Book Modal -->
+    <div id="bookModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="bookModalTitle">Add Book</h2>
+                <button class="close-btn" id="closeBookModal">&times;</button>
+            </div>
+            <form id="bookForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="bookTitle">Title *</label>
+                        <input type="text" id="bookTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookISBN">ISBN</label>
+                        <input type="text" id="bookISBN">
+                    </div>
+                    <div class="form-group">
+                        <label for="bookQuantity">Quantity *</label>
+                        <input type="number" id="bookQuantity" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookAvailable">Available *</label>
+                        <input type="number" id="bookAvailable" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookCost">Cost/Unit *</label>
+                        <input type="number" id="bookCost" step="0.01" min="0" required>
+                    </div>
+                </div>
+                <div class="actions-group">
+                    <button type="button" class="btn btn-secondary" id="cancelBookBtn">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Operation Modal -->
+    <div id="operationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">New Operation</h2>
+                <button class="close-btn" id="closeOperationModal">&times;</button>
+            </div>
+            <form id="operationForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="operationType">Type *</label>
+                        <select id="operationType" required>
+                            <option value="">Select type</option>
+                            <option value="receipt">Receipt (Incoming)</option>
+                            <option value="delivery">Delivery (Outgoing)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="operationBook">Book *</label>
+                        <select id="operationBook" required>
+                            <option value="">Select book</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="operationQuantity">Quantity *</label>
+                        <input type="number" id="operationQuantity" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="operationDate">Date *</label>
+                        <input type="date" id="operationDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="operationWarehouse">Warehouse *</label>
+                        <select id="operationWarehouse" required>
+                            <option value="">Select warehouse</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="operationContact">Contact</label>
+                        <input type="text" id="operationContact">
+                    </div>
+                    <div class="form-group">
+                        <label for="operationStatus">Status *</label>
+                        <select id="operationStatus" required>
+                            <option value="ongoing">Ongoing</option>
+                            <option value="completed">Completed</option>
+                            <option value="late">Late</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="actions-group">
+                    <button type="button" class="btn btn-secondary" id="cancelOperationBtn">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Warehouse Modal -->
+    <div id="warehouseModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Add Warehouse</h2>
+                <button class="close-btn" id="closeWarehouseModal">&times;</button>
+            </div>
+            <form id="warehouseForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="warehouseName">Name *</label>
+                        <input type="text" id="warehouseName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="warehouseLocation">Location *</label>
+                        <input type="text" id="warehouseLocation" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="warehouseAddress">Address *</label>
+                    <textarea id="warehouseAddress" rows="3" required></textarea>
+                </div>
+                <div class="actions-group">
+                    <button type="button" class="btn btn-secondary" id="cancelWarehouseBtn">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+// Data Store - Using JavaScript variables for state management (no localStorage)
+let currentUser = null;
+let users = [
+    { username: 'admin', email: 'admin@bookstore.com', password: 'admin123' }
+];
+let books = [];
+let operations = [];
+let warehouses = [];
+let moveHistory = [];
+let bookIdCounter = 1;
+let operationIdCounter = 1;
+let warehouseIdCounter = 1;
+let editingBookId = null;
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+    initializeEventListeners();
+    updateDashboard();
+});
+
+function initializeEventListeners() {
+    // Login/Signup toggle
+    document.getElementById('showLoginBtn').addEventListener('click', () => {
+        document.getElementById('loginForm').classList.remove('hidden');
+        document.getElementById('signupForm').classList.add('hidden');
+    });
+
+    document.getElementById('showSignupBtn').addEventListener('click', () => {
+        document.getElementById('loginForm').classList.add('hidden');
+        document.getElementById('signupForm').classList.remove('hidden');
+    });
+
+    // Login form
+    document.getElementById('loginForm').addEventListener('submit', handleLogin);
+
+    // Signup form
+    document.getElementById('signupForm').addEventListener('submit', handleSignup);
+
+    // Logout
+    document.getElementById('logoutBtn').addEventListener('click', handleLogout);
+
+    // Navigation
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const view = e.target.dataset.view;
+            switchView(view);
+        });
+    });
+
+    // Book modal
+    document.getElementById('addBookBtn').addEventListener('click', () => {
+        editingBookId = null;
+        document.getElementById('bookModalTitle').textContent = 'Add Book';
+        document.getElementById('bookForm').reset();
+        document.getElementById('bookModal').classList.add('active');
+    });
+
+    document.getElementById('closeBookModal').addEventListener('click', () => {
+        document.getElementById('bookModal').classList.remove('active');
+    });
+
+    document.getElementById('cancelBookBtn').addEventListener('click', () => {
+        document.getElementById('bookModal').classList.remove('active');
+    });
+
+    document.getElementById('bookForm').addEventListener('submit', handleBookSubmit);
+
+    // Operation modal
+    document.getElementById('addOperationBtn').addEventListener('click', () => {
+        populateOperationBookDropdown();
+        populateOperationWarehouseDropdown();
+        document.getElementById('operationForm').reset();
+        document.getElementById('operationModal').classList.add('active');
+    });
+
+    document.getElementById('closeOperationModal').addEventListener('click', () => {
+        document.getElementById('operationModal').classList.remove('active');
+    });
+
+    document.getElementById('cancelOperationBtn').addEventListener('click', () => {
+        document.getElementById('operationModal').classList.remove('active');
+    });
+
+    document.getElementById('operationForm').addEventListener('submit', handleOperationSubmit);
+
+    // Warehouse modal
+    document.getElementById('addWarehouseBtn').addEventListener('click', () => {
+        document.getElementById('warehouseForm').reset();
+        document.getElementById('warehouseModal').classList.add('active');
+    });
+
+    document.getElementById('closeWarehouseModal').addEventListener('click', () => {
+        document.getElementById('warehouseModal').classList.remove('active');
+    });
+
+    document.getElementById('cancelWarehouseBtn').addEventListener('click', () => {
+        document.getElementById('warehouseModal').classList.remove('active');
+    });
+
+    document.getElementById('warehouseForm').addEventListener('submit', handleWarehouseSubmit);
+
+    // Search
+    document.getElementById('moveSearchBar').addEventListener('input', (e) => {
+        filterMoveHistory(e.target.value);
+    });
+}
+
+// Authentication
+function handleLogin(e) {
+    e.preventDefault();
+    const username = document.getElementById('loginUsername').value;
+    const password = document.getElementById('loginPassword').value;
+    const errorEl = document.getElementById('loginError');
+
+    const user = users.find(u => u.username === username && u.password === password);
+
+    if (user) {
+        currentUser = user;
+        document.getElementById('userDisplay').textContent = user.username;
+        document.getElementById('loginScreen').classList.add('hidden');
+        document.getElementById('mainApp').classList.remove('hidden');
+        errorEl.textContent = '';
+    } else {
+        errorEl.textContent = 'Invalid username or password. Please try again.';
+    }
+}
+
+function handleSignup(e) {
+    e.preventDefault();
+    const username = document.getElementById('signupUsername').value;
+    const email = document.getElementById('signupEmail').value;
+    const password = document.getElementById('signupPassword').value;
+    const confirmPassword = document.getElementById('signupConfirmPassword').value;
+    const errorEl = document.getElementById('signupError');
+
+    if (password !== confirmPassword) {
+        errorEl.textContent = 'Passwords do not match. Please try again.';
+        return;
+    }
+
+    if (users.find(u => u.username === username)) {
+        errorEl.textContent = 'Username already exists. Please choose another.';
+        return;
+    }
+
+    if (users.find(u => u.email === email)) {
+        errorEl.textContent = 'Email already registered. Please use another.';
+        return;
+    }
+
+    users.push({ username, email, password });
+    errorEl.textContent = '';
+    alert('Account created successfully! Please login.');
+    document.getElementById('showLoginBtn').click();
+}
+
+function handleLogout() {
+    currentUser = null;
+    document.getElementById('loginScreen').classList.remove('hidden');
+    document.getElementById('mainApp').classList.add('hidden');
+    document.getElementById('loginForm').reset();
+    document.getElementById('signupForm').reset();
+    document.getElementById('userDisplay').textContent = 'Guest';
+}
+
+// Navigation
+function switchView(view) {
+    // Update nav buttons
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.view === view) {
+            btn.classList.add('active');
+        }
+    });
+
+    // Hide all views
+    document.querySelectorAll('.view-container').forEach(v => {
+        v.classList.add('hidden');
+    });
+
+    // Show selected view
+    const viewMap = {
+        dashboard: 'dashboardView',
+        books: 'booksView',
+        operations: 'operationsView',
+        moveHistory: 'moveHistoryView',
+        settings: 'settingsView'
+    };
+
+    document.getElementById(viewMap[view]).classList.remove('hidden');
+
+    // Refresh data
+    if (view === 'dashboard') updateDashboard();
+    if (view === 'books') renderBooksTable();
+    if (view === 'operations') renderOperationsTable();
+    if (view === 'moveHistory') renderMoveHistoryTable();
+    if (view === 'settings') renderWarehousesTable();
+}
+
+// Dashboard
+function updateDashboard() {
+    document.getElementById('totalBooks').textContent = books.reduce((sum, b) => sum + b.quantity, 0);
+    document.getElementById('availableBooks').textContent = books.reduce((sum, b) => sum + b.available, 0);
+    document.getElementById('ongoingOps').textContent = operations.filter(o => o.status === 'ongoing').length;
+
+    // Render receipts and deliveries
+    renderReceiptsTable();
+    renderDeliveriesTable();
+}
+
+function renderReceiptsTable() {
+    const tbody = document.getElementById('receiptsTable');
+    const receipts = operations.filter(o => o.type === 'receipt');
+
+    if (receipts.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; color: var(--color-text-secondary);">No incoming receipts</td></tr>';
+        return;
+    }
+
+    tbody.innerHTML = receipts.map(r => {
+        const book = books.find(b => b.id === r.bookId);
+        return `
+            <tr>
+                <td>${book ? book.title : 'Unknown'}</td>
+                <td>${r.quantity}</td>
+                <td>${r.date}</td>
+                <td><span class="status status-${r.status}">${r.status}</span></td>
+            </tr>
+        `;
+    }).join('');
+}
+
+function renderDeliveriesTable() {
+    const tbody = document.getElementById('deliveriesTable');
+    const deliveries = operations.filter(o => o.type === 'delivery');
+
+    if (deliveries.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; color: var(--color-text-secondary);">No outgoing deliveries</td></tr>';
+        return;
+    }
+
+    tbody.innerHTML = deliveries.map(d => {
+        const book = books.find(b => b.id === d.bookId);
+        return `
+            <tr>
+                <td>${book ? book.title : 'Unknown'}</td>
+                <td>${d.quantity}</td>
+                <td>${d.date}</td>
+                <td><span class="status status-${d.status}">${d.status}</span></td>
+            </tr>
+        `;
+    }).join('');
+}
+
+// Books
+function handleBookSubmit(e) {
+    e.preventDefault();
+
+    const bookData = {
+        title: document.getElementById('bookTitle').value,
+        isbn: document.getElementById('bookISBN').value,
+        quantity: parseInt(document.getElementById('bookQuantity').value),
+        available: parseInt(document.getElementById('bookAvailable').value),
+        cost: parseFloat(document.getElementById('bookCost').value)
+    };
+
+    if (editingBookId) {
+        const book = books.find(b => b.id === editingBookId);
+        Object.assign(book, bookData);
+    } else {
+        books.push({ id: bookIdCounter++, ...bookData });
+    }
+
+    document.getElementById('bookModal').classList.remove('active');
+    renderBooksTable();
+    updateDashboard();
+}
+
+function renderBooksTable() {
+    const tbody = document.getElementById('booksTable');
+
+    if (books.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: var(--color-text-secondary);">No books in inventory</td></tr>';
+        return;
+    }
+
+    tbody.innerHTML = books.map(book => `
+        <tr>
+            <td>${book.title}</td>
+            <td>${book.isbn || '-'}</td>
+            <td>${book.quantity}</td>
+            <td>${book.available}</td>
+            <td>₹${book.cost.toFixed(2)}</td>
+            <td>
+                <button class="btn btn-secondary btn-small" onclick="editBook(${book.id})">Edit</button>
+                <button class="btn btn-secondary btn-small" onclick="deleteBook(${book.id})">Delete</button>
+            </td>
+        </tr>
+    `).join('');
+}
+
+function editBook(id) {
+    editingBookId = id;
+    const book = books.find(b => b.id === id);
+    
+    document.getElementById('bookModalTitle').textContent = 'Edit Book';
+    document.getElementById('bookTitle').value = book.title;
+    document.getElementById('bookISBN').value = book.isbn || '';
+    document.getElementById('bookQuantity').value = book.quantity;
+    document.getElementById('bookAvailable').value = book.available;
+    document.getElementById('bookCost').value = book.cost;
+    
+    document.getElementById('bookModal').classList.add('active');
+}
+
+function deleteBook(id) {
+    if (confirm('Are you sure you want to delete this book?')) {
+        books = books.filter(b => b.id !== id);
+        renderBooksTable();
+        updateDashboard();
+    }
+}
+
+// Operations
+function populateOperationBookDropdown() {
+    const select = document.getElementById('operationBook');
+    select.innerHTML = '<option value="">Select book</option>' + 
+        books.map(b => `<option value="${b.id}">${b.title}</option>`).join('');
+}
+
+function populateOperationWarehouseDropdown() {
+    const select = document.getElementById('operationWarehouse');
+    select.innerHTML = '<option value="">Select warehouse</option>' + 
+        warehouses.map(w => `<option value="${w.id}">${w.name}</option>`).join('');
+}
+
+function handleOperationSubmit(e) {
+    e.preventDefault();
+
+    const operation = {
+        id: operationIdCounter++,
+        type: document.getElementById('operationType').value,
+        bookId: parseInt(document.getElementById('operationBook').value),
+        quantity: parseInt(document.getElementById('operationQuantity').value),
+        date: document.getElementById('operationDate').value,
+        warehouseId: parseInt(document.getElementById('operationWarehouse').value),
+        contact: document.getElementById('operationContact').value,
+        status: document.getElementById('operationStatus').value
+    };
+
+    operations.push(operation);
+
+    // Create move history entry
+    const warehouse = warehouses.find(w => w.id === operation.warehouseId);
+    const book = books.find(b => b.id === operation.bookId);
+    const direction = operation.type === 'receipt' ? 'in' : 'out';
+    const code = `${warehouse ? warehouse.name : 'UNKNOWN'}/${direction}/${operation.id}`;
+
+    moveHistory.push({
+        code,
+        date: operation.date,
+        bookTitle: book ? book.title : 'Unknown',
+        direction: operation.type === 'receipt' ? 'Incoming' : 'Outgoing',
+        contact: operation.contact,
+        quantity: operation.quantity,
+        status: operation.status
+    });
+
+    document.getElementById('operationModal').classList.remove('active');
+    renderOperationsTable();
+    updateDashboard();
+}
+
+function renderOperationsTable() {
+    const tbody = document.getElementById('operationsTable');
+
+    if (operations.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: var(--color-text-secondary);">No operations</td></tr>';
+        return;
+    }
+
+    tbody.innerHTML = operations.map(op => {
+        const book = books.find(b => b.id === op.bookId);
+        return `
+            <tr>
+                <td>OP-${op.id}</td>
+                <td>${op.type === 'receipt' ? '📦 Receipt' : '🚚 Delivery'}</td>
+                <td>${book ? book.title : 'Unknown'}</td>
+                <td>${op.quantity}</td>
+                <td>${op.date}</td>
+                <td><span class="status status-${op.status}">${op.status}</span></td>
+                <td>
+                    <button class="btn btn-secondary btn-small" onclick="deleteOperation(${op.id})">Delete</button>
+                </td>
+            </tr>
+        `;
+    }).join('');
+}
+
+function deleteOperation(id) {
+    if (confirm('Are you sure you want to delete this operation?')) {
+        operations = operations.filter(o => o.id !== id);
+        renderOperationsTable();
+        updateDashboard();
+    }
+}
+
+// Move History
+function renderMoveHistoryTable() {
+    const tbody = document.getElementById('moveHistoryTable');
+
+    if (moveHistory.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: var(--color-text-secondary);">No move history</td></tr>';
+        return;
+    }
+
+    tbody.innerHTML = moveHistory.map(m => `
+        <tr>
+            <td><code>${m.code}</code></td>
+            <td>${m.date}</td>
+            <td>${m.bookTitle}</td>
+            <td>${m.direction}</td>
+            <td>${m.contact || '-'}</td>
+            <td>${m.quantity}</td>
+            <td><span class="status status-${m.status}">${m.status}</span></td>
+        </tr>
+    `).join('');
+}
+
+function filterMoveHistory(searchTerm) {
+    const tbody = document.getElementById('moveHistoryTable');
+    const filtered = moveHistory.filter(m => 
+        m.bookTitle.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        m.code.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    if (filtered.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: var(--color-text-secondary);">No matching records</td></tr>';
+        return;
+    }
+
+    tbody.innerHTML = filtered.map(m => `
+        <tr>
+            <td><code>${m.code}</code></td>
+            <td>${m.date}</td>
+            <td>${m.bookTitle}</td>
+            <td>${m.direction}</td>
+            <td>${m.contact || '-'}</td>
+            <td>${m.quantity}</td>
+            <td><span class="status status-${m.status}">${m.status}</span></td>
+        </tr>
+    `).join('');
+}
+
+// Warehouses
+function handleWarehouseSubmit(e) {
+    e.preventDefault();
+
+    const warehouse = {
+        id: warehouseIdCounter++,
+        name: document.getElementById('warehouseName').value,
+        location: document.getElementById('warehouseLocation').value,
+        address: document.getElementById('warehouseAddress').value
+    };
+
+    warehouses.push(warehouse);
+    document.getElementById('warehouseModal').classList.remove('active');
+    renderWarehousesTable();
+}
+
+function renderWarehousesTable() {
+    const tbody = document.getElementById('warehousesTable');
+
+    if (warehouses.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; color: var(--color-text-secondary);">No warehouses configured</td></tr>';
+        return;
+    }
+
+    tbody.innerHTML = warehouses.map(w => `
+        <tr>
+            <td>${w.name}</td>
+            <td>${w.location}</td>
+            <td>${w.address}</td>
+            <td>
+                <button class="btn btn-secondary btn-small" onclick="deleteWarehouse(${w.id})">Delete</button>
+            </td>
+        </tr>
+    `).join('');
+}
+
+function deleteWarehouse(id) {
+    if (confirm('Are you sure you want to delete this warehouse?')) {
+        warehouses = warehouses.filter(w => w.id !== id);
+        renderWarehousesTable();
+    }
+}
+    </script>
+</body>
+</html>
+
